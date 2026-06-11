@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社群自動發文 Skill 安裝手冊（Mac 零基礎版）</title>
+<style>
+  :root {
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --accent: #4f46e5;
+    --accent-soft: #eef2ff;
+    --ok: #047857;
+    --ok-soft: #ecfdf5;
+    --warn: #b45309;
+    --warn-soft: #fffbeb;
+    --code-bg: #111827;
+    --border: #e5e7eb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif;
+    color: var(--ink);
+    line-height: 1.85;
+    background: #f9fafb;
+    font-size: 17px;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+  header.hero {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: #fff;
+    border-radius: 16px;
+    padding: 36px 32px;
+    margin-bottom: 36px;
+  }
+  header.hero h1 { margin: 0 0 10px; font-size: 26px; line-height: 1.4; }
+  header.hero p { margin: 0; opacity: .92; font-size: 16px; }
+  h2 {
+    font-size: 22px;
+    margin: 48px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+  }
+  h2 .step-num {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 8px;
+    font-size: 15px;
+    padding: 2px 10px;
+    margin-right: 10px;
+    vertical-align: 2px;
+  }
+  ol, ul { padding-left: 24px; }
+  li { margin: 6px 0; }
+  kbd {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-bottom-width: 2px;
+    border-radius: 6px;
+    padding: 1px 7px;
+    font-size: 14px;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+  .cmd {
+    position: relative;
+    background: var(--code-bg);
+    color: #e5e7eb;
+    border-radius: 10px;
+    padding: 14px 110px 14px 16px;
+    margin: 12px 0;
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 14.5px;
+    word-break: break-all;
+    line-height: 1.6;
+  }
+  .cmd button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 7px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .cmd button:active { transform: translateY(-50%) scale(.96); }
+  .cmd button.copied { background: var(--ok); }
+  .note, .warn, .ok-box {
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 15.5px;
+  }
+  .note { background: var(--accent-soft); border-left: 4px solid var(--accent); }
+  .warn { background: var(--warn-soft); border-left: 4px solid #f59e0b; }
+  .ok-box { background: var(--ok-soft); border-left: 4px solid #10b981; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 15.5px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: var(--accent-soft); }
+  code.inline {
+    background: #eef0f4;
+    border-radius: 5px;
+    padding: 1px 6px;
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 14.5px;
+  }
+  a { color: var(--accent); word-break: break-all; }
+  .prep-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin: 14px 0;
+  }
+  footer {
+    margin-top: 60px;
+    color: var(--muted);
+    font-size: 14px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>📣 社群自動發文 Skill 安裝手冊</h1>
+  <p>Mac 零基礎版 — 不需要會 Git、不需要會寫程式，照著一步一步做、複製貼上就能完成。</p>
+</header>
+
+<div class="prep-card">
+  <strong>🎒 開始前，你需要準備：</strong>
+  <ol>
+    <li><strong>一個 Claude 付費帳號</strong>（Pro 或 Max 方案）— 到 <a href="https://claude.ai" target="_blank">claude.ai</a> 註冊並訂閱</li>
+    <li><strong>Chrome 瀏覽器</strong> — 還沒有的話到 <a href="https://www.google.com/chrome/" target="_blank">google.com/chrome</a> 下載安裝</li>
+    <li>你的 Facebook 個人頁要有<strong>至少 20 篇公開貼文</strong>（這個工具要拿來學你的說話風格）</li>
+  </ol>
+</div>
+
+<h2><span class="step-num">第 1 步</span>打開「終端機」（Terminal）</h2>
+<p>終端機是 Mac 內建的程式，長得像黑色或白色的文字視窗。打開方法：</p>
+<ol>
+  <li>同時按鍵盤上的 <kbd>⌘ Command</kbd> + <kbd>空白鍵</kbd>，會跳出搜尋框</li>
+  <li>輸入 <code class="inline">終端機</code>（或 <code class="inline">Terminal</code>）</li>
+  <li>按 <kbd>Enter</kbd></li>
+</ol>
+<p>會出現一個視窗，裡面有一行字、結尾有個游標在閃。這就是你要貼指令的地方。</p>
+<div class="note">💡 使用方式很簡單：<strong>按本頁指令右邊的「複製」按鈕 → 在終端機視窗按 <kbd>⌘</kbd>+<kbd>V</kbd> 貼上 → 按 <kbd>Enter</kbd> 執行</strong>。每次都等它跑完（游標重新出現在新的一行）再貼下一條。</div>
+
+<h2><span class="step-num">第 2 步</span>安裝 Claude Code</h2>
+<p>Claude Code 是在終端機裡使用 Claude 的程式。複製下面這行，貼到終端機，按 <kbd>Enter</kbd>：</p>
+<div class="cmd"><span>curl -fsSL https://claude.ai/install.sh | bash</span><button onclick="copy(this)">複製</button></div>
+<p>跑完之後，<strong>把終端機完全關掉（按 <kbd>⌘</kbd>+<kbd>Q</kbd>），再重新打開一次</strong>（重複第 1 步）。這步很重要，不然電腦會找不到剛裝好的程式。</p>
+<p>重開後，輸入這個並按 <kbd>Enter</kbd>：</p>
+<div class="cmd"><span>claude</span><button onclick="copy(this)">複製</button></div>
+<p>第一次執行會請你登入：它會自動打開瀏覽器，用你的 Claude 帳號登入並按「授權」即可。登入成功後回到終端機，先按 <kbd>Ctrl</kbd>+<kbd>C</kbd> <strong>兩次</strong>離開 Claude（我們等一下還要做安裝）。</p>
+<div class="warn">❗ 如果輸入 <code class="inline">claude</code> 後出現 <code class="inline">command not found</code>，代表你沒有重開終端機，請按 <kbd>⌘</kbd>+<kbd>Q</kbd> 關掉再開一次。</div>
+
+<h2><span class="step-num">第 3 步</span>下載 Skill（不需要 Git）</h2>
+<ol>
+  <li>用瀏覽器打開這個網址（打開就會自動下載一個 ZIP 檔到「下載項目」資料夾）：<br>
+    👉 <a href="https://github.com/Hao0321/claude-skill-social-post/archive/refs/heads/main.zip">https://github.com/Hao0321/claude-skill-social-post/archive/refs/heads/main.zip</a></li>
+  <li>打開 <strong>Finder → 下載項目</strong>，找到 <code class="inline">claude-skill-social-post-main.zip</code></li>
+  <li><strong>點兩下這個 ZIP 檔</strong>，它會解壓縮成一個叫 <code class="inline">claude-skill-social-post-main</code> 的資料夾<br>
+    <span style="color:var(--muted)">（如果下載完已經自動變成資料夾、沒有 ZIP 檔，那就直接跳下一步）</span></li>
+</ol>
+
+<h2><span class="step-num">第 4 步</span>把 Skill 放到正確位置</h2>
+<p>Skill 要放進一個隱藏資料夾，用 Finder 找不太到，所以我們用終端機來搬。回到終端機，<strong>一行一行</strong>複製貼上、每行按一次 <kbd>Enter</kbd>：</p>
+<div class="cmd"><span>mkdir -p ~/.claude/skills</span><button onclick="copy(this)">複製</button></div>
+<div class="cmd"><span>cp -r ~/Downloads/claude-skill-social-post-main/social-post ~/.claude/skills/social-post</span><button onclick="copy(this)">複製</button></div>
+<div class="cmd"><span>cd ~/.claude/skills/social-post</span><button onclick="copy(this)">複製</button></div>
+<div class="cmd"><span>mv style_profile.example.md style_profile.md</span><button onclick="copy(this)">複製</button></div>
+<div class="cmd"><span>mv content_plan.example.md content_plan.md</span><button onclick="copy(this)">複製</button></div>
+<p>最後檢查一下有沒有成功，貼上這行：</p>
+<div class="cmd"><span>ls ~/.claude/skills/social-post</span><button onclick="copy(this)">複製</button></div>
+<div class="ok-box">✅ 如果有列出 <code class="inline">SKILL.md</code>、<code class="inline">style_profile.md</code>、<code class="inline">content_plan.md</code> 之類的檔案名稱，就代表安裝成功了！</div>
+<div class="warn">❗ 如果第二行出現 <code class="inline">No such file or directory</code>，通常是 ZIP 還沒解壓縮（回去做第 3 步的點兩下），或是檔案不在「下載項目」資料夾。</div>
+
+<h2><span class="step-num">第 5 步</span>安裝「Claude for Chrome」瀏覽器擴充功能</h2>
+<p>這個 skill 要靠 Claude 操作你的 Chrome 瀏覽器來自動發文，所以需要裝官方擴充功能：</p>
+<ol>
+  <li>打開 <strong>Chrome</strong></li>
+  <li>前往 Chrome 線上應用程式商店，搜尋 <strong>「Claude for Chrome」</strong>（Anthropic 官方出品），按「加到 Chrome」</li>
+  <li>點 Chrome 右上角的 Claude 圖示，<strong>用你同一個 Claude 帳號登入</strong></li>
+  <li>在 Chrome 裡<strong>登入你要發文的社群帳號</strong>：Facebook、Instagram、Threads、X（要發哪些就登入哪些）</li>
+</ol>
+<div class="note">💡 如果商店搜不到或無法安裝，可以到 <a href="https://claude.ai/chrome" target="_blank">claude.ai/chrome</a> 看看，這個功能可能需要特定方案或申請開通。</div>
+
+<h2><span class="step-num">第 6 步</span>開始使用 🎉</h2>
+<p>以後每次要用，流程都一樣：</p>
+<ol>
+  <li>打開終端機（<kbd>⌘</kbd>+<kbd>空白鍵</kbd> → 輸入 <code class="inline">終端機</code> → <kbd>Enter</kbd>）</li>
+  <li>輸入 <code class="inline">claude</code> 按 <kbd>Enter</kbd></li>
+  <li>直接用中文跟它對話，主要有三句咒語：</li>
+</ol>
+<table>
+  <tr><th style="width:42%">你打的字</th><th>它會做什麼</th></tr>
+  <tr><td><code class="inline">幫我學 FB 風格</code></td><td>讀你最近 20 篇貼文，學會你的語氣（<strong>第一次先做這個</strong>）</td></tr>
+  <tr><td><code class="inline">幫我排社群內容日曆</code></td><td>幫你規劃 14 天的發文計畫</td></tr>
+  <tr><td><code class="inline">今天發一篇</code></td><td>問你今天的素材 → 寫草稿給你看 → 你確認後自動發文</td></tr>
+</table>
+<p>過程中 Claude 可能會問你「是否允許執行某動作」，看一下內容沒問題就選允許。<strong>發文前它一定會先給你看草稿，你說 OK 它才會發</strong>，不用擔心亂發。</p>
+<p>用完想離開，按 <kbd>Ctrl</kbd>+<kbd>C</kbd> 兩次，或直接關掉終端機視窗。</p>
+<div class="warn">⚠️ 自動發文是<strong>對外公開的行為</strong>。第一次發文時建議全程盯著看草稿和發布過程，確認沒問題再放手讓它自動跑。</div>
+
+<h2>🚑 常見問題急救包</h2>
+<table>
+  <tr><th style="width:45%">狀況</th><th>解法</th></tr>
+  <tr><td>輸入 <code class="inline">claude</code> 說 <code class="inline">command not found</code></td><td>終端機 <kbd>⌘</kbd>+<kbd>Q</kbd> 完全關閉，重新打開再試</td></tr>
+  <tr><td>貼指令說 <code class="inline">No such file or directory</code></td><td>ZIP 沒解壓縮，或資料夾名稱不對——回 Finder 確認「下載項目」裡有 <code class="inline">claude-skill-social-post-main</code> 資料夾</td></tr>
+  <tr><td>Claude 說找不到 skill</td><td>重新執行第 4 步最後的 <code class="inline">ls</code> 檢查指令，確認檔案真的在</td></tr>
+  <tr><td>無法自動發文</td><td>確認 Chrome 擴充功能已登入 Claude 帳號，且 Chrome 裡的社群帳號是登入狀態</td></tr>
+</table>
+
+<footer>
+  Skill 來源：<a href="https://github.com/Hao0321/claude-skill-social-post" target="_blank">github.com/Hao0321/claude-skill-social-post</a>（MIT License）
+</footer>
+
+</div>
+<script>
+function copy(btn) {
+  var text = btn.parentNode.querySelector('span').textContent;
+  navigator.clipboard.writeText(text).then(function () {
+    btn.textContent = '已複製 ✓';
+    btn.classList.add('copied');
+    setTimeout(function () {
+      btn.textContent = '複製';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>
